@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<h1>Add Expense</h1>
+<br />
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }}
+    {{ form.name() }}
+    <br>
+    {{ form.category.label }}
+    {{ form.category() }}
+    <br>
+    {{ form.amount.label }}
+    {{ form.amount() }}
+    <br>
+    {{ form.save() }}
+</form>
+{% endblock %}
