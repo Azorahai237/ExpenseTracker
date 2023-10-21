@@ -2,10 +2,20 @@ from app import app, db
 from flask import render_template, flash, redirect, url_for
 from app.forms import IncomeInputForm, ExpenseInputForm, GoalInputForm, EditIncomeForm, EditExpenseForm, EditGoalForm
 from app.models import income, expense, goal
+from analytics import Income_Total, Expense_Total
+import json
 
 @app.route('/')
-def index():
-    return render_template('index.html', title = 'index')
+def home():
+    percentage = 0
+    if (goal.query.first()==None):
+        bar_percentage = 0
+    else:
+        goal_entry = goal.query.first()
+        percentage = round((Income_Total() - Expense_Total())/goal_entry.amount)
+    bar_percentage =[]
+    bar_percentage.append(percentage)
+    return render_template('home.html', title = 'home', percentage = json.dumps(bar_percentage))
 
 @app.route('/Expense')
 def Expense():
@@ -89,7 +99,7 @@ def DeleteIncome(entry_id):
 def EditIncome(entry_id):
     entry = income.query.get_or_404(int(entry_id))
     form = EditIncomeForm()
-    # checking if form is empty, else save new values
+   
     if form.validate_on_submit():
         if form.name.data != '' :
             entry.name = form.name.data
@@ -98,10 +108,7 @@ def EditIncome(entry_id):
         
         if form.amount.data is not None:
             entry.amount = form.amount.data
-    # try:
-    #     flash('Edit was a success','success')
-    # except Exception as e:
-    #     flash("ERROR", 'error')    
+      
     db.session.commit()
     return render_template('EditIncome.html', title = 'edit income', form = form)
 

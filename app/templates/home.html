@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+<div class="container">
+    <h2 class="text-center">Saving Goal</h2>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%;" id="progress-bar"><span class="progress-text">0%</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+{% endblock %}
+<script>
+    let bar_percentage = JSON.parse({{percentage | tojson}});
+
+    // JavaScript code to update the progress bar
+    function updateProgressBar(percentage) {
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.style.width = percentage + '%';
+        progressBar.setAttribute('aria-valuenow', percentage);
+        percentageText.textContent = percentage + '%';
+
+    }
+    // Example of updating the progress bar to 75%:
+    updateProgressBar(bar_percentage);
+</script>
+
+{% endblock %}
