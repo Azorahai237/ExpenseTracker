@@ -1,2 +1,6 @@
 from app import db, models
-print(models.expense.query.all())
+
+entry = models.expense.query.get(1)
+print(entry.name)
+
+

@@ -9,15 +9,12 @@
 </ul>
 {% endif %}
 {% endwith %}
-<h1>Add Expense</h1>
-<br/>
+<h1>Edit Goal</h1>
+<br />
 <form method="POST">
     {{ form.hidden_tag() }}
     {{ form.name.label }}
     {{ form.name() }}
-    <br>
-    {{ form.category.label }}
-    {{ form.category() }}
     <br>
     {{ form.amount.label }}
     {{ form.amount() }}

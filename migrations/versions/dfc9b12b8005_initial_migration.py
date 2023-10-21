@@ -1,8 +1,8 @@
-"""initial
+"""initial migration
 
-Revision ID: add0c6069d76
+Revision ID: dfc9b12b8005
 Revises: 
-Create Date: 2023-10-20 12:53:58.831996
+Create Date: 2023-10-20 15:20:22.625163
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'add0c6069d76'
+revision = 'dfc9b12b8005'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,12 +23,14 @@ def upgrade():
     sa.Column('name', sa.String(length=30), nullable=False),
     sa.Column('category', sa.String(length=30), nullable=False),
     sa.Column('amount', sa.Float(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('goal',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=30), nullable=False),
     sa.Column('amount', sa.Float(), nullable=False),
-    sa.PrimaryKeyConstraint('name'),
+    sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('amount')
     )
     op.create_table('income',
@@ -36,7 +38,8 @@ def upgrade():
     sa.Column('name', sa.String(length=30), nullable=False),
     sa.Column('category', sa.String(length=30), nullable=False),
     sa.Column('amount', sa.Float(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     # ### end Alembic commands ###
 

@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Expenses</h1>
+<h1>Incomes</h1>
 <table class="table table-hover">
     <thead>
       <tr>
@@ -20,8 +20,8 @@
         <td>{{entry.name}}</td>
         <td>{{entry.category}}</td>
         <td>{{entry.amount}}</td>
-        <td><a  href="{{url_for('EditExpense', entry_id = entry.id)}}" class="btn btn-warning">Edit</a></td>
-        <td><a  href="{{url_for('DeleteExpense', entry_id = entry.id)}}" class="btn btn-danger">Delete</a></td>
+        <td><a  href="{{url_for('EditIncome', entry_id = entry.id)}}" class="btn btn-warning">Edit</a></td>
+        <td><a  href="{{url_for('DeleteIncome', entry_id = entry.id)}}" class="btn btn-danger">Delete</a></td>
         
       </tr>
       {% endfor %}
